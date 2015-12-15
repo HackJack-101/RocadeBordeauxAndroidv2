@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rocade Bordeaux</title>
+    <meta name="description" content="Site mobile pour afficher le trafic de la Rocade de Bordeaux.">
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="user-scalable=yes">
+    <script type="text/javascript">
+			var previousTimestamp = "";
+
+			var getTimestamp = function ()
+			{
+				var req = new XMLHttpRequest();
+				req.open('GET', 'http://hackjack.info/rocade/bordeaux/timestamp.php', true);
+				req.onreadystatechange = function (aEvt) {
+					if (req.readyState == 4) {
+						if (req.status == 200)
+							updateTraffic(req.responseText);
+						else
+							alert("Problème de connexion");
+					}
+				};
+				req.send(null);
+			};
+
+			var updateTraffic = function (timestamp)
+			{
+				if (previousTimestamp !== timestamp)
+				{
+					previousTimestamp = timestamp;
+					console.log("Timestamp: " + timestamp)
+					var trafficLayers = document.getElementsByClassName("traffic");
+					for (var i = 0; i < trafficLayers.length; i++)
+					{
+						var path = trafficLayers[i].getAttribute("data-path");
+						trafficLayers[i].setAttribute("src", "http://www.bison-fute.gouv.fr/data/data-" + timestamp + "/background/1.0.0/trafic/5/" + path + ".png");
+						console.log("Layer " + path + " updated.")
+					}
+				}
+			};
+
+			var scaleContent = function ()
+			{
+				var html = document.documentElement;
+				var container = document.getElementById("container");
+				var layers = document.getElementsByClassName("layer");
+
+
+				var width = html.clientWidth;
+				var height = html.clientHeight;
+				var size = height;
+				if (width < height)
+					var size = width;
+				container.style.width = size + "px";
+				container.style.height = size + "px";
+
+				var ratio = size / 750;
+				for (var i = 0; i < layers.length; i++)
+				{
+					layers[i].style.width = (256 * ratio) + "px";
+					layers[i].style.height = (256 * ratio) + "px";
+					var topStr = layers[i].style.top;
+					var leftStr = layers[i].style.left;
+					var top = parseInt(topStr.substring(0, topStr.length - 2));
+					var left = parseInt(leftStr.substring(0, leftStr.length - 2));
+					layers[i].style.top = (top * ratio) + "px";
+					layers[i].style.left = (left * ratio) + "px";
+				}
+			};
+
+			window.addEventListener("load", function load(event) {
+				scaleContent();
+				getTimestamp();
+				setInterval(getTimestamp, 1000 * 60 * 2);
+			}, false);
+		</script>
+    <style>
+        *
+        {
+        padding: 0;
+        margin: 0;
+        }
+
+        body
+        {
+        background: black;
+        }
+
+        #container {
+        position:relative;
+        display: block;
+        margin: auto;
+        overflow: hidden;
+        }
+
+        img
+        {
+        position: absolute;
+        height: 100%;
+        width:  100%;
+        }
+
+        .layer
+        {
+        position: absolute;
+        width: 256px;
+        height: 256px;
+        overflow: hidden;
+        }
+
+        .traffic
+        {
+        display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <img id="rocade" src="./rocade.png" alt=""/>
+    <div class="layer" style="left: 317px; top: 51px;">
+        <img class="traffic" data-path="57/97" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt=""/>
+    </div>
+    <div class="layer" style="left: 318px; top: 307px;">
+        <img class="traffic" data-path="57/96" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt=""/>
+    </div>
+    <div class="layer" style="left: 573px; top: 51px;">
+        <img class="traffic" data-path="58/97" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt=""/>
+    </div>
+    <div class="layer" style="left: 574px; top: 307px;">
+        <img class="traffic" data-path="58/96" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt=""/>
+    </div>
+    <div class="layer" style="left: 62px; top: 52px;">
+        <img class="traffic" data-path="56/97" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt=""/>
+    </div>
+    <div class="layer" style="left: 62px; top: 308px;">
+        <img class="traffic" data-path="56/96" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt=""/>
+    </div>
+    <div class="layer" style="left: 318px; top: -205px;">
+        <img class="traffic" data-path="57/98" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt=""/>
+    </div>
+    <div class="layer" style="left: 318px; top: 563px; height: 187px !important;">
+        <img class="traffic" data-path="57/95" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt=""/>
+    </div>
+    <div class="layer" style="left: 62px; top: -204px;">
+        <img class="traffic" data-path="56/98" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt=""/>
+    </div>
+    <div class="layer" style="left: 62px; top: 564px;">
+        <img class="traffic" data-path="56/95" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt=""/>
+    </div>
+    <div class="layer" style="left: -194px; top: 564px;">
+        <img class="traffic" data-path="55/95" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt=""/>
+    </div>
+</div>
+</body>
+</html>

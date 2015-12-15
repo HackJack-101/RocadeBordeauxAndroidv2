@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.bordeaux.rocade.MainActivity">
+    <item
+        android:id="@+id/home"
+        android:title="@string/home" android:icon="@drawable/ic_action_refresh" android:showAsAction="always"/>
+
+    <item
+        android:id="@+id/news"
+        android:title="@string/news"/>
+
+    <item
+        android:id="@+id/quit"
+        android:title="@string/quit"/>
+</menu>

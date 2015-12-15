@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Rocade Bordeaux</string>
+    <string name="action_settings">Settings</string>
+    <string name="home">Recharger</string>
+    <string name="news">Alertes</string>
+    <string name="quit">Quitter</string>
+    <string name="fluid">Fluide</string>
+    <string name="heavy">Dense</string>
+    <string name="saturated">Saturé</string>
+    <string name="blocked">Bloqué</string>
+</resources>
