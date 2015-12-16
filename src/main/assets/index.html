@@ -35,10 +35,16 @@
 					for (var i = 0; i < trafficLayers.length; i++)
 					{
 						var path = trafficLayers[i].getAttribute("data-path");
-						trafficLayers[i].setAttribute("src", "http://www.bison-fute.gouv.fr/data/data-" + timestamp + "/background/1.0.0/trafic/5/" + path + ".png");
+						trafficLayers[i].setAttribute("src", "http://www3.bison-fute.gouv.fr/data/data-" + timestamp + "/background/1.0.0/trafic/5/" + path + ".png");
 						console.log("Layer " + path + " updated.")
 					}
 				}
+			};
+
+			var resizeElement = function (element, height, width)
+			{
+				element.style.height = height + "px";
+				element.style.width = width + "px";
 			};
 
 			var scaleContent = function ()
@@ -52,9 +58,12 @@
 				var height = html.clientHeight;
 				var size = height;
 				if (width < height)
-					var size = width;
-				container.style.width = size + "px";
-				container.style.height = size + "px";
+				{
+					size = width;
+					var diff = height - width;
+					container.style.marginTop = Math.round(diff / 2) + "px";
+				}
+				resizeElement(container, size, size);
 
 				var ratio = size / 750;
 				for (var i = 0; i < layers.length; i++)
@@ -70,10 +79,21 @@
 				}
 			};
 
-			window.addEventListener("load", function load(event) {
+			window.addEventListener("load", function () {
 				scaleContent();
 				getTimestamp();
 				setInterval(getTimestamp, 1000 * 60 * 2);
+
+
+
+				window.addEventListener("resize", function () {
+					var html = document.documentElement;
+					var width = html.clientWidth;
+					var height = html.clientHeight;
+					console.log(width);
+					console.log(height);
+//					scaleContent();
+				}, false);
 			}, false);
 		</script>
     <style>
@@ -152,6 +172,8 @@
     <div class="layer" style="left: -194px; top: 564px;">
         <img class="traffic" data-path="55/95" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt=""/>
     </div>
+
+    <img id="junctions" src="./junctionsLayer.png" alt=""/>
 </div>
 </body>
 </html>

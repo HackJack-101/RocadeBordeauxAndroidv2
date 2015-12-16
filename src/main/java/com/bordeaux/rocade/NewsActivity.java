@@ -1,25 +1,13 @@
 package com.bordeaux.rocade;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.WindowManager;
-import android.webkit.CookieSyncManager;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 public class NewsActivity extends AppCompatActivity {
 
