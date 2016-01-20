@@ -84,16 +84,6 @@
 				getTimestamp();
 				setInterval(getTimestamp, 1000 * 60 * 2);
 
-
-
-				window.addEventListener("resize", function () {
-					var html = document.documentElement;
-					var width = html.clientWidth;
-					var height = html.clientHeight;
-					console.log(width);
-					console.log(height);
-//					scaleContent();
-				}, false);
 			}, false);
 		</script>
     <style>
@@ -138,7 +128,8 @@
 </head>
 <body>
 <div id="container">
-    <img id="rocade" src="./rocade.png" alt=""/>
+	<img id="rocade" src="./rocade.png" alt=""/>
+	<img id="correction" src="./correctionLayer.png" alt=""/>
     <div class="layer" style="left: 317px; top: 51px;">
         <img class="traffic" data-path="57/97" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt=""/>
     </div>
